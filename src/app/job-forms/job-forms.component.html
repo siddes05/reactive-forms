@@ -1,0 +1,99 @@
+
+
+<div class="container">
+    <legend>Job Portal</legend>
+    <div class="row">
+      <div class="col col-md-8" style="overflow-y: scroll; max-height: 100vh">
+        <form [formGroup]="jobRegForm" (ngSubmit)="save()">
+          <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input [class.is-invalid]="jobRegForm.get('Name')?.invalid && jobRegForm.get('Name')?.touched"
+              type="text"
+              class="form-control"
+              id="Name"
+              formControlName="Name"
+            />
+          </div>
+          <div class="mb-3" >
+            <label for="city" class="form-label">City</label>
+            <input [class.is-invalid]="jobRegForm.get('city')?.invalid && jobRegForm.get('city')?.touched"
+              type="text"
+              class="form-control"
+              id="city"
+              formControlName="city"
+            />
+          </div>
+        
+        <div class="mb-3">
+          <label for="domain" class="form-label">domain</label>
+          <input  [class.is-invalid]="jobRegForm.get('domain')?.invalid && jobRegForm.get('domain')?.touched"
+            type="text"
+            class="form-control"
+            id="domain"
+            formControlName="domain"
+          />
+          <span class="text-danger" *ngIf="jobRegForm.errors?.['domainAvailabilty']">vaccany for .Net is not available in chennai</span>
+        </div>
+        <div class="mb-3">
+            <label for="experience" class="form-label">experience</label>
+            <input [class.is-invalid]="jobRegForm.get('experience')?.invalid && jobRegForm.get('experience')?.touched"
+              type="text"
+              class="form-control"
+              id="experience"
+              formControlName="experience"
+            />
+            <span class="text-danger" *ngIf="jobRegForm.get('experience')?.errors?.['experience']">experience should be greater than 5 years</span>
+          </div>
+          
+          <div class="mb-3" formGroupName="contacts">
+            <div class="row">
+              <div class="col col-md-4 offset-md-4">
+                <div class="mb-3">
+                  <label class="form-label">Prefered Contact</label>
+                  <select
+                    class="form-select"
+                    formControlName="contactType"
+                    aria-label="Default select example"
+                  >
+                    <option value="-1">-select-</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input [class.is-invalid]="jobRegForm.get('contacts')?.get('email')?.invalid && jobRegForm.get('contacts')?.get('email')?.touched"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                  <span class="text-danger" *ngIf="jobRegForm.get('contacts')?.get('email')?.errors?.['required']">Email is required</span>
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input [class.is-invalid]="jobRegForm.get('contacts')?.get('phone')?.invalid && jobRegForm.get('contacts')?.get('phone')?.touched"
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    formControlName="phone"
+                  />
+                  <span class="text-danger" *ngIf="jobRegForm.get('contacts')?.get('phone')?.errors?.['required']">phone number is required</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col col-md-4">
+        <div style="position: fixed">{{ preview }}</div>
+      </div>
+    </div>
+  </div>
